@@ -14,7 +14,137 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      applications: {
+        Row: {
+          availability: string | null
+          created_at: string
+          domain: string
+          email: string
+          experience_level: string | null
+          id: string
+          job_id: string | null
+          location: string | null
+          name: string
+          phone: string
+          qualification: string
+          sample_response: string | null
+          status: string
+          why_join: string | null
+        }
+        Insert: {
+          availability?: string | null
+          created_at?: string
+          domain: string
+          email: string
+          experience_level?: string | null
+          id?: string
+          job_id?: string | null
+          location?: string | null
+          name: string
+          phone: string
+          qualification: string
+          sample_response?: string | null
+          status?: string
+          why_join?: string | null
+        }
+        Update: {
+          availability?: string | null
+          created_at?: string
+          domain?: string
+          email?: string
+          experience_level?: string | null
+          id?: string
+          job_id?: string | null
+          location?: string | null
+          name?: string
+          phone?: string
+          qualification?: string
+          sample_response?: string | null
+          status?: string
+          why_join?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contacts: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          inquiry_type: string | null
+          message: string
+          name: string
+          replied: boolean
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          inquiry_type?: string | null
+          message: string
+          name: string
+          replied?: boolean
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          inquiry_type?: string | null
+          message?: string
+          name?: string
+          replied?: boolean
+        }
+        Relationships: []
+      }
+      jobs: {
+        Row: {
+          created_at: string
+          department: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          location: string | null
+          requirements: string[] | null
+          slug: string
+          title: string
+          type: string | null
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          requirements?: string[] | null
+          slug: string
+          title: string
+          type?: string | null
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          requirements?: string[] | null
+          slug?: string
+          title?: string
+          type?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
