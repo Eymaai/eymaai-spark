@@ -51,7 +51,7 @@ function JobPage() {
             <Reveal delay={0.1} className="mt-10">
               <h2 className="font-display text-2xl">What we're looking for</h2>
               <ul className="mt-4 space-y-3">
-                {(job.requirements ?? []).map((r) => (
+                {(job.requirements ?? []).map((r: string) => (
                   <li key={r} className="flex items-start gap-3 text-ink-soft">
                     <Check className="w-4 h-4 mt-1 text-amber shrink-0" />
                     <span>{r}</span>
