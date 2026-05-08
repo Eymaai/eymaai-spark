@@ -9,61 +9,43 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { SiteLayout } from "@/components/site/SiteLayout";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
+    <SiteLayout>
+      <div className="min-h-[60vh] grid place-items-center px-4">
+        <div className="text-center max-w-md">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-amber">404</p>
+          <h1 className="font-display text-5xl mt-3">Page not found</h1>
+          <p className="mt-3 text-ink-muted">The page you're looking for doesn't exist or has moved.</p>
+          <Link to="/" className="inline-flex mt-7 items-center rounded-full bg-forest text-cream px-6 py-3 text-sm hover:bg-forest-light transition-colors">
+            Take me home
           </Link>
         </div>
       </div>
-    </div>
+    </SiteLayout>
   );
 }
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+    <SiteLayout>
+      <div className="min-h-[60vh] grid place-items-center px-4">
+        <div className="text-center max-w-md">
+          <h1 className="font-display text-3xl">This page didn't load</h1>
+          <p className="mt-3 text-ink-muted text-sm">Something went wrong on our end.</p>
           <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            onClick={() => { router.invalidate(); reset(); }}
+            className="mt-6 inline-flex items-center rounded-full bg-forest text-cream px-6 py-3 text-sm hover:bg-forest-light transition-colors"
           >
             Try again
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
         </div>
       </div>
-    </div>
+    </SiteLayout>
   );
 }
 
@@ -72,21 +54,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "EYMA AI — Training the intelligence of tomorrow" },
+      { name: "description", content: "EYMA AI delivers expert RLHF data, prompt engineering, red-teaming and Indic language data to leading AI labs. Based in Delhi, India." },
+      { name: "author", content: "EYMA AI" },
+      { property: "og:title", content: "EYMA AI — Training the intelligence of tomorrow" },
+      { property: "og:description", content: "Expert human feedback that makes AI more accurate, safer, and smarter." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -110,10 +86,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <SiteLayout>
+        <Outlet />
+      </SiteLayout>
     </QueryClientProvider>
   );
 }
